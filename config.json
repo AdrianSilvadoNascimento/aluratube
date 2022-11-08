@@ -1,0 +1,21 @@
+{
+    "name": "Adrian Silva do Nascimento",
+    "job": "Web Software Engineer",
+    "github": "AdrianSilvadoNascimento",
+    "playList": {
+        "games": [
+            {
+                "title": "Título",
+                "url": "url",
+                "thumb": "link da thumb"
+            }
+        ],
+        "frontend": [
+            {
+                "title": "Título",
+                "url": "url",
+                "thumb": "link da thumb"
+            }
+        ]
+    }
+}
