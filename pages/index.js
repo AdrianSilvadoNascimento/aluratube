@@ -1,86 +1,90 @@
 import config from "../config.json"
 import styled from "styled-components"
+import { CSSReset } from "../source/components/CSSReset"
+import Menu from "../source/components/Menu"
+import { StyledTimeline } from "../source/components/Timeline"
 
 function HomePage() {
-    const colorHead = { backgroundColor: "red", color: "#fff", fontWeight: "bold" }
+  const body = {
+    display: "flex",
+    flexDirection: 'column',
+    flex: 1,
+  }
 
-    console.log(config.playList)
-    
-    return (
-        
-        <div style={ colorHead }>
-            <Menu />
-            <Header />
-            <TimeLine playlists={config.playList} />
-        </div>
-    )
+  return (
+    <>
+      <CSSReset />
+      <div style={body}>
+        <Menu />
+        <Header />
+        <TimeLine playlists={config.playList} />
+      </div>
+    </>
+  )
 }
 export default HomePage
 
-function Menu() {
-    return (
-        <div>Menu</div>
-    )
-}
-
 const StyledHeader = styled.div`
-    img {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-    }
-    .user-info {
-        margin-top: 50px;
-        display: flex;
-        align-items: center;
-        padding: 16px 32px;
-        gap: 16px;
-        width: 100%;
-    }
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  .banner {
+    width: 100%;
+    height: 350px;
+    border-radius: 0;
+  }
+  .user-info {
+    display: flex;
+    align-items: center;
+    padding: 16px 32px;
+    gap: 16px;
+    width: 100%;  
+  }
 `
 function Header() {
-    const perfil = { width: "150px", borderRadius: "50%"}
-    return (
-        <StyledHeader>
-            {/* <img src="" alt="banner" /> */}
-            <section className="user-info">
-                <img src={`https://github.com/${config.github}.png`} alt="foto-de-perfil"/>
-                <div>
-                    <h2>{config.name}</h2>
-                    <p>{config.job}</p>
-                </div>
-            </section>
-
-        </StyledHeader>
-    )
+  return (
+    <StyledHeader>
+      <img 
+        className="banner"
+        src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80" 
+        alt="banner" />
+      <section className="user-info">
+        <img
+          src={`https://github.com/${config.github}.png`}
+          alt="foto-de-perfil"
+        />
+        <div>
+          <h2>{config.name}</h2>
+          <p>{config.job}</p>
+        </div>
+      </section>
+    </StyledHeader>
+  )
 }
 function TimeLine(props) {
-    console.log('o props', props.playlists)
-    const playlistName = Object.keys(props.playlists)
-    return (
-        <div>
-            {playlistName.map(val => {
-                const videos = props.playlists[val]
-               console.log(val)
-               console.log(videos)
-               return (
-                <section>
-                    <h2>{playlistName}</h2>
-                    <div>
-                        {videos.map((video) => {
-                            return (
-                                <a href={video.url}>
-                                    <img src={video.thumb} />
-                                    <span>
-                                        {video.title}
-                                    </span>
-                                </a>
-                            )
-                        })}
-                    </div>
-                </section>
-               )
-            })}
-        </div>
-    )
+  const playlistName = Object.keys(props.playlists)
+  return (
+    <StyledTimeline>
+      {playlistName.map((val) => {
+        const videos = props.playlists[val]
+        return (
+          <section>
+            <h2>{playlistName}</h2>
+            <div>
+              {videos.map((video) => {
+                return (
+                  <a href={video.url}>
+                    <img src={video.thumb} />
+                    <span>{video.title}</span>
+                  </a>
+                )
+              })}
+            </div>
+          </section>
+        )
+      })}
+    </StyledTimeline>
+  )
 }
